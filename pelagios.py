@@ -18,13 +18,12 @@ for i in range(1, 14):
 
 		for location in locations :
 			j+=1
-			rdf += '\n<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:oac="http://www.openannotation.org/ns/" xmlns:dcterms="http://purl.org/dc/terms/" rdf:ID="isaw-papers-'+str(i)+'-reference-'+str(j)+'"/>'
+			rdf += '\n<rdf:Description xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:oac="http://www.openannotation.org/ns/" xmlns:dcterms="http://purl.org/dc/terms/" rdf:ID="isaw-papers-'+str(i)+'-reference-'+str(j)+'">'
 			rdf+= '\n' +annotation
 
 			rdf+= ' \n<oac:hasBody rdf:resource="' + location["href"] + '"/>'
 			try :
 				target = location.find_parent("p")["id"]
-				
 			# article 9 has locations in figure elements and is raising this exception 
 			except(TypeError) :
 				try :
@@ -32,7 +31,7 @@ for i in range(1, 14):
 				except(KeyError):
 					print("No id")
 			rdf += '\n' + creator
-			rdf += '\n<oac:hasTarget rdf:resource="http://dlib.nyu.edu/awdl/isaw/isaw-papers/'+str(i)+'/#'+target+'">'
+			rdf += '\n<oac:hasTarget rdf:resource="http://dlib.nyu.edu/awdl/isaw/isaw-papers/'+str(i)+'/#'+target+'"/>'
 			rdf += '\n<dcterms:title>Reference in ISAW Papers '+str(i)+' to "'+location.get_text()+'".</dcterms:title>'
 			rdf += '\n</rdf:Description>'
 
