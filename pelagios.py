@@ -24,10 +24,10 @@ for i in range(1, 14):
 
 		for location in locations :
 			j+=1
-			rdf += '\n<rdf:Description rdf:ID="isaw-papers-'+str(i)+'-reference-'+str(j)+'">'
+			rdf += '\n<pelagios:AnnotatedThing rdf:ID="isaw-papers-'+str(i)+'-reference-'+str(j)+'">'
 			rdf+= '\n' +annotation
 
-			rdf+= ' \n<pelagios:AnnotatedThing rdf:resource="' + location["href"] + '"/>'
+			rdf+= ' \n<oac:hasBody rdf:resource="' + location["href"] + '"/>'
 			try :
 				target = location.find_parent("p")["id"]
 			# article 9 has locations in figure elements and is raising this exception 
@@ -39,7 +39,7 @@ for i in range(1, 14):
 			rdf += '\n' + creator
 			rdf += '\n<oac:hasTarget rdf:resource="http://dlib.nyu.edu/awdl/isaw/isaw-papers/'+str(i)+'/#'+target+'"/>'
 			rdf += '\n<dcterms:title>Reference in ISAW Papers '+str(i)+' to "'+location.get_text()+'".</dcterms:title>'
-			rdf += '\n</rdf:Description>'
+			rdf += '\n</pelagios:AnnotatedThing>'
 
 rdf += '\n</rdf:RDF>'
 
